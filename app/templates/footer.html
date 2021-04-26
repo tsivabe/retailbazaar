@@ -1,0 +1,98 @@
+<style>
+    .footer-link {
+        color: white;
+    }
+
+    .page-footer {
+        background-color: #5f6861;
+        padding-top: 100px;
+        color: white;
+    }
+
+    #footer-hr {
+        background-color: rgb(245, 243, 243);
+    }
+</style>
+
+<!-- Footer -->
+<footer class="page-footer pt-4">
+    <div class="container-fluid text-center">
+        <!-- Grid row -->
+        <div class="row p-5">
+
+            <!-- Grid column 1 -->
+            <div class="col-lg-4 col-md-6 col-sm-6 p-3">
+                <div>
+                    <h3>Realbazaar Website</h3>
+
+                    <p>
+                        <a class="footer-link" href="{% url 'home' %}">Home</a>
+                        -
+                        <a class="footer-link" href="{% url 'contact' %}">Contact</a>
+                        -
+                        <a class="footer-link" href="{% url 'products:product-list' %}">Products</a>
+                    </p>
+
+                    <p>Realbazaar &copy; 2021</p>
+                </div>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column 2 -->
+            <div class="col-lg-4 col-md-6 col-sm-6 p-3">
+                <div class="row">
+                    <div class="col-4 text-right">
+                        <i class="fa fa-map-marker fa-lg"></i>
+                    </div>
+                    <div class="col-8 text-left">
+                        <p>National College of Ireland</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right">
+                        <i class="fa fa-phone fa-lg"></i>
+                    </div>
+                    <div class="col-8 text-left">
+                        <p>+353 899480214</p>                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right">
+                        <i class="fa fa-envelope fa-lg"></i>
+                    </div>
+                    <div class="col-8 text-left">
+                        <p><a class="footer-link" href="mailto:tsivabe@gmail.com">tsivabe@gmail.com</a></p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column 3 -->
+            <div class="col-lg-4 col-md-6 col-sm-6 p-3">
+                <h5>About the company</h5>
+                <p> Buy from Real bazaar .<br><i><u> Buy
+                            Direct from source...</u></i></p>
+
+                <div>
+                    <a class="footer-link" href="https://www.facebook.com/shizza.vz/"><i class="fab fa-facebook-f fa-lg p-1"></i></a>
+                    <a class="footer-link" href="https://twitter.com/sivaraj831"><i class="fab fa-twitter fa-lg p-1"></i></a>
+                    <a class="footer-link" href="https://github.com/x20182473"><i class="fab fa-github fa-lg p-1"></i></a>
+                </div>
+
+            </div>
+            <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+    </div>
+
+    <!-- Copyright -->
+    <hr id="footer-hr">
+    
+    <div class="footer-copyright text-center py-3">© 2021-2022 Copyright:
+        <a class="footer-link" href="{% url 'home' %}"> @Realbazaar </a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
