@@ -1,79 +1,65 @@
-# Deploying Django to AWS ECS with Terraform
+The project consists of three phases
+1)	Application development, testing, and validation
+2)	Docker container creation from the final application code.
+3)	Deploy the application in Cloud using Terraform 
+                   
 
-Sets up the following AWS infrastructure:
+VOICE ENABLED E-COMMERCE ONLINE SHOPPING CART
 
-- Networking:
-    - VPC
-    - Public and private subnets
-    - Routing tables
-    - Internet Gateway
-    - Key Pairs
-- Security Groups
-- Load Balancers, Listeners, and Target Groups
-- IAM Roles and Policies
-- ECS:
-    - Task Definition (with multiple containers)
-    - Cluster
-    - Service
-- Launch Config and Auto Scaling Group
-- RDS
-- Health Checks and Logs
+Project Phases:
+1) Application development, testing, and validation.
 
-## Want to learn how to build this?
+   OS & pkgs required to build the project: (OS used: ubuntu 20.04)
+   a) install psycopg2 dependencies gcc postgresql libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0 binaries.
+   b) pip install --upgrade pip
+   c) pip install Django pillow gunicorn SpeechRecognition PyAudio 
 
-Check out the [post](https://testdriven.io/blog/deploying-django-to-ecs-with-terraform/).
+   d) Update the code and validate the code locally using below command
+       python manage.py runserver 0.0.0.0:8000
+   d) Configure gunicorn for outside connectivity:
+    gunicorn RetailCom.wsgi:application --bind 0.0.0.0:8000
+   
+   Validate if the website and voice search feauture works fine.
+    
+   Upload the code to Github: 
+     git init
+     git clone github.com:x20182473/retailbazaar.git
+     git add .
+     git commit "application code changes"
+     git push 
+   <<Validate the changes updated>>
 
-## Want to use this project?
+    Git hub link for this project hosted on private bucket.
 
-1. Install Terraform
+   
+2)	Docker container creation from the final application code.
 
-1. Sign up for an AWS account
+     Build:
+      # sudo docker build -t retail_django_final .
+       Validate:
+      # sudo docker run -p 8007:8000 --name siva2 retail_django_final gunicorn RetailCom.wsgi:application --bind 0.0.0.0:8000
+       Add Tag:
+      # sudo docker tag retail_dj_final tsivabe/retail_django:retail_dj_final
+       Push to docker (Configure Host SSH keys to docker for passwordless connection)
+      # sudo docker push tsivabe/retail_django:retail_dj_final
 
-1. Create two ECR repositories, `django-app` and `nginx`.
 
-1. Fork/Clone
 
-1. Build the Django and Nginx Docker images and push them up to ECR:
+3)	Deploy the application in Cloud using Terraform 
 
-    ```sh
-    $ cd app
-    $ docker build -t <AWS_ACCOUNT_ID>.dkr.ecr.us-west-1.amazonaws.com/django-app:latest .
-    $ docker push <AWS_ACCOUNT_ID>.dkr.ecr.us-west-1.amazonaws.com/django-app:latest
-    $ cd ..
+     Install awscli on the ubuntu machine
+     configure aws keys on to it under ~/.aws/credentials file.
+      cd to the directory created for terraform
+     run below commands:
 
-    $ cd nginx
-    $ docker build -t <AWS_ACCOUNT_ID>.dkr.ecr.us-west-1.amazonaws.com/nginx:latest .
-    $ docker push <AWS_ACCOUNT_ID>.dkr.ecr.us-west-1.amazonaws.com/nginx:latest
-    $ cd ..
-    ```
+      # terraform init
+      # terraform plan
+      # terraform apply
 
-1. Update the variables in *terraform/variables.tf*.
+     capture the load balancer url from the terraform out put and view it in web browser for the connectivity check.
+ Login to AWS console and check the EC2 instance, Load balancer, Autoscaling group, security group, Database resources has been created on it.
+      we have created the S3 , S3 glacier manually, sns, sms cloud watch an cloud trail services manually.
 
-1. Set the following environment variables, init Terraform, create the infrastructure:
+Project code uploaded on GITHUB Link : https://github.com/x20182473/retailbazaar
+Docker image loaded on Docker hub link :  https://hub.docker.com/repository/docker/tsivabe/retail_django
 
-    ```sh
-    $ cd terraform
-    $ export AWS_ACCESS_KEY_ID="YOUR_AWS_ACCESS_KEY_ID"
-    $ export AWS_SECRET_ACCESS_KEY="YOUR_AWS_SECRET_ACCESS_KEY"
-
-    $ terraform init
-    $ terraform apply
-    $ cd ..
-    ```
-
-1. Terraform will output an ALB domain. Create a CNAME record for this domain
-   for the value in the `allowed_hosts` variable.
-
-1. Open the EC2 instances overview page in AWS. Use `ssh ec2-user@<ip>` to
-   connect to the instances until you find one for which `docker ps` contains
-   the Django container. Run
-   `docker exec -it <container ID> python manage.py migrate`.
-
-1. Now you can open `https://your.domain.com/admin`. Note that `http://` won't work.
-
-1. You can also run the following script to bump the Task Definition and update the Service:
-
-    ```sh
-    $ cd deploy
-    $ python update-ecs.py --cluster=production-cluster --service=production-service
-    ```
