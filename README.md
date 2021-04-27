@@ -65,3 +65,23 @@ Project Phases:
 Project code uploaded on GITHUB Link : https://github.com/x20182473/retailbazaar
 Docker image loaded on Docker hub link :  https://hub.docker.com/repository/docker/tsivabe/retail_django
 
+OUTPUT DETAILS FROM THE DOCKER THAT RUNS THE SITE:
+root@5171b2cdb1c8:/usr/src/app# pip freeze
+asgiref==3.3.4
+Django==3.2
+gunicorn==20.0.4
+Pillow==8.2.0
+psycopg2-binary==2.8.6
+PyAudio==0.2.11
+pytz==2021.1
+SpeechRecognition==3.8.1
+sqlparse==0.4.1
+root@5171b2cdb1c8:/usr/src/app# python --version
+Python 3.8.5
+root@5171b2cdb1c8:/usr/src/app# uname -a
+Linux 5171b2cdb1c8 5.8.0-44-generic #50~20.04.1-Ubuntu SMP Wed Feb 10 21:07:30 UTC 2021 x86_64 GNU/Linux
+root@5171b2cdb1c8:/usr/src/app# pip --version
+pip 21.0.1 from /usr/local/lib/python3.8/site-packages/pip (python 3.8)
+root@5171b2cdb1c8:/usr/src/app#
+
+
