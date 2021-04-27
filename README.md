@@ -9,7 +9,7 @@ VOICE ENABLED E-COMMERCE ONLINE SHOPPING CART
 Project Phases:
 1) Application development, testing, and validation.
 
-   OS & pkgs required to build the project: (OS used: ubuntu 20.04)
+   OS & pkgs required to build the project: (OS used: ubuntu 20.04 & Python 3.8.5 Docker Image))
    a) install psycopg2 dependencies gcc postgresql libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0 binaries.
    b) pip install --upgrade pip
    c) pip install Django pillow gunicorn SpeechRecognition PyAudio 
